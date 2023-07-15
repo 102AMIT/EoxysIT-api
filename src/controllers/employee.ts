@@ -12,6 +12,7 @@ export const createEmployee = async (req: Request, res: Response) => {
 
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
+    console.log(hashedPassword,"jjjj")
 
     const existingEmployee = await Employee.findOne({ name });
     if (existingEmployee) {

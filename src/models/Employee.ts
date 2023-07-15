@@ -19,6 +19,10 @@ const employeeSchema = new Schema<EmployeeType>({
   annualSalary: {
     type: Number,
     required: true
+  },
+  password:{
+    type:String,
+    required:true
   }
 });
 
