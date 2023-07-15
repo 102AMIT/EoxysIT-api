@@ -13,12 +13,17 @@ export const createEmployee = async (req: Request, res: Response) => {
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
+    const existingEmployee = await Employee.findOne({ name });
+    if (existingEmployee) {
+      return res.status(400).json({ error: 'Employee with the same name already exists' });
+    }
+
     const newEmployee = new Employee({
       name,
       title,
       department,
       annualSalary,
-      password: hashedPassword, 
+      password: hashedPassword,
     });
 
     const savedEmployee = await newEmployee.save();
@@ -30,6 +35,7 @@ export const createEmployee = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Failed to create employee' });
   }
 };
+
 
 
 export const updateEmployee = async (req: Request, res: Response) => {

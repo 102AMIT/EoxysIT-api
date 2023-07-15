@@ -4,7 +4,8 @@ import { EmployeeType } from '../types/employeeType';
 const employeeSchema = new Schema<EmployeeType>({
   name: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   title: {
     type: String,
